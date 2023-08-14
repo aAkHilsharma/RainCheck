@@ -1,17 +1,16 @@
-const API_KEY = "baf16e1fda0b6a4403246c31f176ddc1";
 const axios = require("axios");
 
 async function fetchWeatherData(cities) {
-  const apiKey = API_KEY;
+  const apiKey = process.env.API_KEY;
   const units = "metric";
-  const baseUrl = "http://api.openweathermap.org/data/2.5/weather";
+  const weatherApiBaseUrl = process.env.WEATHER_API_BASE_URL;
 
   const weatherData = {};
 
   await Promise.all(
     cities.map(async (city) => {
       try {
-        const response = await axios.get(baseUrl, {
+        const response = await axios.get(weatherApiBaseUrl, {
           params: { q: city, units, appid: apiKey },
         });
 
